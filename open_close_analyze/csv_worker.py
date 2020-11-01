@@ -37,7 +37,8 @@ class CsvDictEditor:
             csv_array[i]["<SHORT_EXIT>"] = 0
             csv_array[i]["<LONG_EXIT>"] = 0
             csv_array[i]["<POSITION>"] = 0
-            csv_array[i]["<TODAY_INCOME>"] = "0%"
+            csv_array[i]["<TODAY_INCOME>"] = 0
+            csv_array[i]["<TOTAL_INCOME>"] = 0
         return csv_array
 
     def transformed_csv(self):
