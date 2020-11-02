@@ -67,6 +67,23 @@ class Algorithm:
 
         return csv_array
 
+    def fill_with_procents(self,count_period=2):
+        csv_array = self.csv_array
+        for i in range(count_period,len(csv_array)):
+            csv_array[i]['<TODAY_INCOME>'] = round(
+                (float(csv_array[i]['<CLOSE>']) - float(csv_array[i - 1]['<CLOSE>'])) * 100.0 / float(
+                    csv_array[i - 1]['<CLOSE>']) * csv_array[i - 1]['<POSITION>'], 2)
+            csv_array[i]['<TOTAL_INCOME>'] = round(csv_array[i - 1]['<TOTAL_INCOME>'] + csv_array[i]['<TODAY_INCOME>'], 2)
+
+        return csv_array
+
+    def fill_with_zeros(self):
+        csv_array = self.csv_array
+        for i in range(1,len(csv_array)):
+            if(csv_array[i-1]['<POSITION>'] == -1 & csv_array[i]['<POSITION>'] == 1 ):
+                csv_array[i]['<POSITION>'] = 0
+        return csv_array
+
     # def long_position(self, count_period=2):
     #     csv_array = self.csv_array
     #     maximum = count_period
@@ -128,6 +145,10 @@ if __name__ == "__main__":
     csv = csvAlgorithm.short_position()
     csvAlgorithm = Algorithm(csv)
     csv = csvAlgorithm.long_position()
+    csvAlgorithm = Algorithm(csv)
+    csv = csvAlgorithm.fill_with_zeros()
+    csvAlgorithm = Algorithm(csv)
+    csv = csvAlgorithm.fill_with_procents()
     # csvAlgorithm = Algorithm(csv)
     # csv = csvAlgorithm.short_position()
 
