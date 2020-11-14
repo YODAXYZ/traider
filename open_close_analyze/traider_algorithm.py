@@ -1,4 +1,5 @@
 import csv_worker
+from csv_writer import CsvWriter
 
 
 class Algorithm:
@@ -149,6 +150,10 @@ if __name__ == "__main__":
     csv = csvAlgorithm.fill_with_zeros()
     csvAlgorithm = Algorithm(csv)
     csv = csvAlgorithm.fill_with_procents()
+    csvWriter = CsvWriter(csv)
+    xlsx_path = '1.xlsx'
+    csvWriter.writeToXls(xlsx_path,csv)
+
     # csvAlgorithm = Algorithm(csv)
     # csv = csvAlgorithm.short_position()
 
